@@ -1,0 +1,49 @@
+@import 'styles.css';
+
+h2 {
+    margin-top: 60px;
+    font-family: "Arial", serif;
+    font-weight: 300;
+    text-align: center;
+    color: #333;
+}
+
+h4 {
+    margin: 40px;
+    font-family: "Arial", serif;
+    font-weight: 300;
+    text-align: center;
+    color: #333;
+}
+
+.btn {
+	float: right;
+	margin-bottom: 20px;
+}
+
+p {
+    line-height: 28px;
+    margin-bottom: 25px;
+}
+
+.divider {
+    width: 100%;
+    height: 3px;
+    background-color: #2e2d2d;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.review-author {
+    text-align: right;
+    float: right;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 1050px) {
+    .main-text > h2 {
+        padding-top: 60px;
+    }
+}
+

@@ -1,0 +1,20 @@
+CACHE MANIFEST
+
+#version 0.1
+
+index.html
+Fans.html
+News.html
+Calendar of matches.html
+contacts.html
+styles.css
+css/bootstrap.min.css
+resources\mainPhoto.jpg
+emirates-stadium-1416679_1920.jpg
+resources\logo.png
+jquery.js
+js/bootstrap.min.js
+https://madnessmedia.net/wp-content/uploads/2017/06/YoutubeThumb2-758x426.png
+
+FALLBACK:
+Admin.html error.html
