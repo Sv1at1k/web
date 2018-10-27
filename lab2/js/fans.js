@@ -24,7 +24,7 @@ const feedbackTemplate = (name, text, date, time) => `
 const onSubmitPress = (e) => {
   e.preventDefault();
 
-  const isValid = (textarea.value.length > 0 && namearea.value.length > 0);
+  const isValid = (textarea.value.length > 0 && namearea.value.length > 0&& /\S/.test(textarea.value)&& /\S/.test(namearea.value));
   form.classList.add('was-validated')
 
   if (!isValid) return;

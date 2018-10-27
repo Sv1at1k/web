@@ -1,0 +1,42 @@
+@import 'styles.css';
+
+h2 {
+    margin: 70px;
+    font-family: "Arial", serif;
+    font-weight: 300;
+    text-align: center;
+    color: #333;
+}
+
+img {
+    float: left;
+    margin-bottom: 10px;
+}
+
+.btn {
+    float: right;
+    margin-bottom: 20px;
+}
+
+.input-form {
+    display: flex;
+}
+
+#newsForm {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#addPicture {
+    float: right;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    z-index: 20;
+}
+
+@media screen and (max-width: 1050px) {
+    .main-text > h2 {
+        padding-top: 60px;
+    }
+}
+

@@ -8,18 +8,24 @@ const caption = getById('caption')
 const onSubmitPress = (e) => {
   e.preventDefault();
 
-  const isValid = (text.value.length > 0 && caption.value.length > 0);
+  const isValid = (text.value.length > 0 && caption.value.length > 0&& /\S/.test(text.value)&& /\S/.test(caption.value));
   input_form.classList.add('was-validated')
   newsForm.classList.add('was-validated');
 
-  if (!isValid) return;
-
+  if (!isValid) 
+     { alert('Некоректні дані!');
+      return;
+}else {
   input_form.classList.remove('was-validated');
   newsForm.classList.remove('was-validated');
   input_form.reset();
   newsForm.reset();
 
-  alert('Вашу новину успішно збережено!');
+  alert('Вашу новину успішно збережено!');  
+    
+}
+
+  
 }
 
 const fileInput = getById('formForFile')

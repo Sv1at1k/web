@@ -3,62 +3,12 @@ body {
 	margin-right: 100px; 
 }
 
-nav {
- 	margin-top: -10px ;
-	margin-left:  6px ;
-	background-color: #FFFFFF;
-	position: relative;
-}
-
-nav ul {
-    list-style: none;
-    position: relative;
-}
-
-nav ul li {
-    display: inline-block;
-    background-color: #FFFFFF;
-	color: black;
-}
-
-nav a {
-    display: block;
-    padding: 0 10px;
-    color: #000000;
-    font-size: 20px;
-    line-height: 60px;
-    text-decoration: none;
-}
-
-nav ul ul {
-	display: none;
-	position: absolute;
-	top: 100%;
-}
-
-nav ul li :hover {
-	background: black;
-	color: white;
-}
-
-nav ul li:hover > ul {
-    display: inherit;
-    background: white;
-	color: black;
-}
-
-nav ul ul li {
-    min-width: 170px;
-    float: none;
-    display: list-item;
-    position: relative;
-}
 
 h1 {
 	font-family: monospace;
 	font-size: 200%;
 	text-align: center;
-}
+}                                                      
 
 h2 {
 	font-family: monospace;
