@@ -90,19 +90,19 @@
 
             <div class="col-md-12">
                 <form id="newsForm">
-                    <textarea id="caption" type="text" class="form-control" placeholder="Заголовок" required></textarea>
+                    <textarea id="caption" type="text" class="form-control" onchange="getNewsTitle()"placeholder="Заголовок" required></textarea>
                     <div class="valid-feedback">
                     </div>
                     <div class="invalid-feedback">
                         Введіть заголовок
                     </div>
                     <br>
-                    <textarea id="text" type="text" class="form-control" rows ="5" placeholder="Новина" required></textarea>
+                    <textarea id="text" type="text" class="form-control" rows ="5" onchange="getNewsBody()" placeholder="Новина" required></textarea>
                     <br>
                     <div class="valid-feedback">
                     </div>
                     <div class="invalid-feedback">Введіть текст новини</div>
-                    <button id="submit-btn" type="submit" type="button" class="btn btn-primary">Надіслати</button>
+                    <button id="submit-btn" type="submit" type="button" class="btn btn-primary" onclick="publish()">Надіслати</button>
                 </form>
             </div>
 

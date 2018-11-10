@@ -4,43 +4,99 @@ const feedbackContainer = getById('container');
 const form = getById('form');
 const namearea = getById('name');
 const textarea = getById('text');
+var inputFansData;
+var inputNewsData;
+var inputFansName;
+var useLocalStorage = true;
 
 
-const feedbackTemplate = (name, text, date, time) => ` 
-    <div class="container">
-        <br>
-        <p>
-        <br>
-        ${text}
-        </p>
-        <br>
-        <span class="review-date">${date}, ${time}</span>
-        <span class="review-author">${name}</span>
-    </div>
 
-    <div class="divider"></div>
-`
+function getFansName(){
+    inputFansName = document.getElementById("name").value;
+}
 
-const onSubmitPress = (e) => {
-  e.preventDefault();
+function getFansStuff() {
+    inputFansData = document.getElementById("text").value;
+}
 
-  const isValid = (textarea.value.length > 0 && namearea.value.length > 0&& /\S/.test(textarea.value)&& /\S/.test(namearea.value));
-  form.classList.add('was-validated')
+function currentDate() {
+    var d = new Date();
+    var dformat = [(d.getMonth() + 1),
+               d.getDate(),
+               d.getFullYear()].join('/') + ' ' + [d.getHours(),
+               d.getMinutes(),
+               d.getSeconds()].join(':');
+    console.log(dformat);
+    return dformat;
+}
 
-  if (!isValid) return;
+function getLocalFansData() {
+    if (localStorage.getItem("comment_number") !== null) {
+        var newsNumber = parseInt(localStorage.getItem("comment_number"));
+        var data = "";
+        for (var i = 0; i < newsNumber; i++) {
+            data += localStorage.getItem("comment" + i);
+        }
+    }
+    return data;
+}
 
-  const date = new Date();
+function saveFansDataLocaly(fansComment) {
+    if (useLocalStorage) {
+        if (localStorage.getItem("comment_number") !== null) {
+            var news_number = parseInt(localStorage.getItem("comment_number"));
+            localStorage.setItem("comment" + news_number, fansComment);
+            localStorage.setItem("comment_number", news_number + 1);
+        } else {
+            localStorage.setItem("comment_number", 1);
+            localStorage.setItem("comment0", fansComment);
+        }
+    } else {
+        //add indexedDb
+        }
+    }
 
-  $('#container').prepend(
-    feedbackTemplate(namearea.value, textarea.value, date.toLocaleDateString(), date.toLocaleTimeString())
-  );
 
-  form.classList.remove('was-validated');
-  namearea.value = '';
-  textarea.value = '';
+function postFansData(data) {
+    document.getElementById("reviewsList").innerHTML += data;
+}
+
+function postStuff() {
+    var date = currentDate();
+    if (inputFansData != null && /\S/.test(inputFansData) && inputFansName != null && /\S/.test(inputFansName)) {
+        if (window.navigator.onLine){
+            //emulate server
+        }else{
+        var fansComment = getCommentBody(inputFansData, date, inputFansName);
+        saveFansDataLocaly(fansComment);
+        document.getElementById("text").value = "";
+        document.getElementById("name").value = "";
+        inputFansData = "";
+        inputFansName = "";
+        data = "";
+        }
+    }
 }
 
 
-// Bind listeners to the DOM
-const addButton = getById('submitBtn');
-addButton.onclick = onSubmitPress;
+window.addEventListener('load', function () {
+
+    function updateOnlineStatus(event) {}
+    var test = window.navigator.onLine;
+    if (window.navigator.onLine) {
+        if (useLocalStorage) {
+            if (getLocalFansData() !== undefined) {
+                postFansData(getLocalFansData());
+            }
+        } else {
+            //todo idexedDB
+        }
+    }
+
+});
+
+
+function getCommentBody(commentBody, date, name) {
+        return "<div class=\"divider\"></div><div class=\"container\"><br><p><br>"+commentBody+"</p><br>       <span class=\"review-date\">"+date+"</span><span class=\"review-author\">"+name+"</span></div>";
+    }
+

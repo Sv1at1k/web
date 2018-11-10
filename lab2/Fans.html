@@ -109,7 +109,7 @@
                 <h4>Написати звернення</h4>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <textarea id="name" type="text" class="form-control" placeholder="Прізвище Ім'я" required></textarea>
+                        <textarea id="name" type="text" class="form-control" onchange="getFansName();" placeholder="Прізвище Ім'я" required></textarea>
                         
                         <div class="invalid-feedback">
                             Введіть ваше ім'я
@@ -117,12 +117,12 @@
                     </div>
                     <br><br>
                     <div class="col-xs-12">
-                        <textarea id="text" class="form-control" rows="7" placeholder="Текст Вашого звернення" required></textarea>
+                        <textarea id="text" class="form-control" rows="7" placeholder="Текст Вашого звернення" required onchange="getFansStuff();"></textarea>
                         <div class="invalid-feedback">
                             Введіть текст відгука
                         </div>
                         <br>
-                        <input id="submitBtn" type="button" value="Надіслати" class="btn btn-primary">
+                        <input id="submitBtn" type="button" value="Надіслати" class="btn btn-primary" onclick="postStuff();"> 
                     </div>
                 </div>
             </form>

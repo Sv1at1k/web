@@ -1,51 +1,100 @@
-const getById = id => document.getElementById(id);
+var inputNewsData;
+var inputNewsTitle;
+var inputNewsBody;
+var useLocalStorage = true;
 
-const input_form = getById('addPicture');
-const newsForm = getById('newsForm')
-const text = getById('text');
-const caption = getById('caption') 
-
-const onSubmitPress = (e) => {
-  e.preventDefault();
-
-  const isValid = (text.value.length > 0 && caption.value.length > 0&& /\S/.test(text.value)&& /\S/.test(caption.value));
-  input_form.classList.add('was-validated')
-  newsForm.classList.add('was-validated');
-
-  if (!isValid) 
-     { alert('Некоректні дані!');
-      return;
-}else {
-  input_form.classList.remove('was-validated');
-  newsForm.classList.remove('was-validated');
-  input_form.reset();
-  newsForm.reset();
-
-  alert('Вашу новину успішно збережено!');  
-    
+function getNewsTitle() {
+    inputNewsTitle = document.getElementById("caption").value;
 }
 
-  
+function getNewsBody() {
+    inputNewsBody = document.getElementById("text").value;
 }
 
-const fileInput = getById('formForFile')
+function currentDate() {
+    var d = new Date();
+    var dformat = [(d.getMonth() + 1),
+               d.getDate(),
+               d.getFullYear()].join('/') + ' ' + [d.getHours(),
+               d.getMinutes(),
+               d.getSeconds()].join(':');
+    console.log(dformat);
+    return dformat;
 
-function readURL(input) {
+}
 
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = function(e) {
-      $('#example_picture').attr('src', e.target.result);
+function publish() {
+    if (inputNewsTitle !== null && inputNewsBody !== null && /\S/.test(inputNewsBody) && /\S/.test(inputNewsTitle)) {
+        var data = "<div class=\"col-lg-3 col-md-3 col-sm-6 col-xs-12\"> <div class = \"thumbnail\"> <img src = \"637298374-612x612.jpg\" alt=\"Generic placeholder thumbnail\"> </div><div class = \"caption\"> <h3>" + inputNewsTitle + "</h3><p>" + inputNewsBody + "</p><a href = \"#\" class=\"btn btn-default\" role=\"button\">Read</a></div> </div>";
+        if (window.navigator.onLine) {
+            //do smth(server emulation)
+        } else {
+            if (useLocalStorage) {
+                saveNewsLocaly(data);
+            } else {
+                
+            }
+        }
+        document.getElementById("caption").value = "";
+        document.getElementById("text").value = "";
     }
 
-    reader.readAsDataURL(input.files[0]);
-  }
 }
 
-$("#formForFile").change(function() {
-  readURL(this);
+function getLocalNewsData() {
+    if (localStorage.getItem("news_number") !== null) {
+        var news_number = parseInt(localStorage.getItem("news_number"));
+        var data = "";
+        for (var i = 0; i < news_number; i++) {
+            data += localStorage.getItem("news" + i);
+        }
+    }
+    return data;
+}
+
+function postNews(data) {
+    if (data !== undefined) {
+        document.getElementById("news").innerHTML += data;
+    }
+}
+
+function saveNewsLocaly(data) {
+    if (useLocalStorage) {
+        if (localStorage.getItem("news_number") !== null) {
+            var news_number = parseInt(localStorage.getItem("news_number"));
+            localStorage.setItem("news" + news_number, data);
+            localStorage.setItem("news_number", news_number + 1);
+        } else {
+            localStorage.setItem("news_number", 1);
+            localStorage.setItem("news0", data);
+        }
+    } else {
+
+    }
+}
+
+function isOnline() {
+    return window.navigator.onLine;
+}
+
+window.addEventListener('load', function () {
+
+    function updateOnlineStatus(event) {}
+
+    if (window.navigator.onLine) {
+        if (useLocalStorage) {
+            if (getLocalNewsData() !== undefined) {
+                postNews(getLocalNewsData());
+            }
+        } else {
+            //add IndexedDB
+        }
+
+    } else {
+
+
+    }
 });
 
-const addButton = getById('submit-btn');
-addButton.onclick = onSubmitPress;
+
+
